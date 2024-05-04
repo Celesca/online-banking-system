@@ -1,14 +1,21 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CustomersModule } from './customers/customers.module';
+import { Customer } from './customers/entities/customer.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: './app.sqlite',
-      entities: [],
-      synchronize: process.env.NODE_ENV != 'production',
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '',
+      database: 'bank_db',
+      entities: [Customer],
+      synchronize: true,
     }),
+    CustomersModule,
   ],
 })
 export class AppModule {}
