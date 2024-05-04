@@ -7,6 +7,7 @@ import { LoanTypeModule } from './loan-type/loan-type.module';
 import { LoanModule } from './loan/loan.module';
 import { AccountModule } from './account/account.module';
 import { AccountTypeModule } from './account-type/account-type.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { AccountTypeModule } from './account-type/account-type.module';
     LoanModule,
     AccountModule,
     AccountTypeModule,
+    TransactionModule,
   ],
 })
 export class AppModule {}

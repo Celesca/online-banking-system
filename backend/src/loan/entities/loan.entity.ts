@@ -13,7 +13,7 @@ export class Loan {
   @PrimaryGeneratedColumn()
   loan_id: number;
 
-  @ManyToOne(() => LoanType, (loantype) => loantype.loantype_id)
+  @ManyToOne(() => LoanType, (loantype) => loantype.loan_type_id)
   @JoinColumn({ name: 'loantype_id' })
   loantype_id: number;
 

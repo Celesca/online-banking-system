@@ -1,3 +1,4 @@
+import { AccountType } from 'src/account-type/entities/account-type.entity';
 import { Customer } from 'src/customers/entities/customer.entity';
 import {
   Column,
@@ -13,7 +14,9 @@ export class Account {
   @PrimaryGeneratedColumn()
   account_id: number;
 
-  // @ManyToOne(() => accountType)
+  @ManyToOne(() => AccountType, (accountType) => accountType.account_type_id)
+  @JoinColumn({ name: 'account_type_id' })
+  account_type_id: number;
 
   @Column({ type: 'float', nullable: false })
   account_balance: number;
