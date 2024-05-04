@@ -1,5 +1,11 @@
 import { Person } from 'src/persons/entities/person.entity';
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Customer {
@@ -12,5 +18,4 @@ export class Customer {
   @OneToOne(() => Person)
   @JoinColumn({ name: 'person_id' })
   person: Person;
-  
 }
