@@ -1,19 +1,22 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class LoanType {
+export class AccountType {
   @PrimaryGeneratedColumn()
-  loan_type_id: number;
+  account_type_id: number;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
-  loan_type_name: string;
+  description: string;
+
+  @Column({ type: 'varchar', length: 20, nullable: false })
+  account_type_name: string;
 
   @Column({ type: 'float', nullable: false })
   interest_rate: number;
 
   @Column({ type: 'int', nullable: false })
-  value_of_package: number;
+  interest_day: number;
 
   @Column({ type: 'int', nullable: false })
-  interest_day: number;
+  value_of_package: number;
 }
