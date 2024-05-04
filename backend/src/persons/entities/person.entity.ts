@@ -22,7 +22,7 @@ export class Person {
   @Column({ type: 'varchar', length: 10 })
   phone: string;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'datetime' })
   dateofbirth: Date;
 
   @CreateDateColumn()
