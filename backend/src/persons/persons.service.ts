@@ -1,6 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { CreatePersonDto } from './dto/create-person.dto';
-import { UpdatePersonDto } from './dto/update-person.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Person } from './entities/person.entity';
 import { Repository } from 'typeorm';
@@ -12,10 +10,6 @@ export class PersonsService {
     private personRepository: Repository<Person>,
   ) {}
 
-  create(createPersonDto: CreatePersonDto) {
-    return 'This action adds a new person';
-  }
-
   findAll(): Promise<Person[]> {
     return this.personRepository.find();
   }
@@ -24,11 +18,14 @@ export class PersonsService {
     return `This action returns a #${id} person`;
   }
 
-  update(id: number, updatePersonDto: UpdatePersonDto) {
-    return `This action updates a #${id} person`;
-  }
-
   remove(id: number) {
     return `This action removes a #${id} person`;
+  }
+
+  findByName(firstname: string, lastname: string) {
+    return this.personRepository
+      .createQueryBuilder('person')
+      .where('person.firstname = :firstname', { firstname: firstname })
+      .andWhere('person.lastname = :lastname', { lastname: lastname });
   }
 }

@@ -1,28 +1,33 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Person {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'int' })
   person_id: number;
 
-  @Column()
+  @Column({ type: 'varchar', length: 45 })
   firstname: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 45 })
   lastname: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 60 })
   email: string;
 
-  @Column()
+  @Column({ type: 'varchar', length: 10 })
   phone: string;
 
-  @Column()
+  @Column({ type: 'date' })
   dateofbirth: Date;
 
-  @Column()
+  @CreateDateColumn()
   entrydate: Date;
 
-  @Column()
+  @Column({ type: 'varchar', length: 100 })
   address: string;
 }
