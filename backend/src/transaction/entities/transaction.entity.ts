@@ -1,4 +1,5 @@
 import { Account } from 'src/account/entities/account.entity';
+import { TransactionType } from 'src/transaction-type/entities/transaction-type.entity';
 import {
   Column,
   CreateDateColumn,
@@ -12,6 +13,13 @@ import {
 export class Transaction {
   @PrimaryGeneratedColumn()
   transaction_id: number;
+
+  @ManyToOne(
+    () => TransactionType,
+    (transactionType) => transactionType.transaction_type_id,
+  )
+  @JoinColumn({ name: 'transaction_type_id' })
+  transaction_type_id: number;
 
   @Column({ type: 'float', nullable: false })
   amount: number;
