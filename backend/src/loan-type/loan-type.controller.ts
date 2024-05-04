@@ -1,9 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Param, Delete } from '@nestjs/common';
 import { LoanTypeService } from './loan-type.service';
 
 @Controller('loan-type')
