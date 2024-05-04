@@ -5,6 +5,10 @@ import { PersonsModule } from './persons/persons.module';
 import { EmployeesModule } from './employees/employees.module';
 import { LoanTypeModule } from './loan-type/loan-type.module';
 import { LoanModule } from './loan/loan.module';
+import { AccountModule } from './account/account.module';
+import { AccountTypeModule } from './account-type/account-type.module';
+import { TransactionModule } from './transaction/transaction.module';
+import { TransactionTypeModule } from './transaction-type/transaction-type.module';
 
 @Module({
   imports: [
@@ -23,6 +27,10 @@ import { LoanModule } from './loan/loan.module';
     EmployeesModule,
     LoanTypeModule,
     LoanModule,
+    AccountModule,
+    AccountTypeModule,
+    TransactionModule,
+    TransactionTypeModule,
   ],
 })
 export class AppModule {}
