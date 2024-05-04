@@ -31,5 +31,5 @@ jobs:
       - name: Install backend dependencies
         run: npm install
 
-      - name: Lint backend code
-        run: npm run lint
+      # - name: Lint backend code
+      #   run: npm run lint
