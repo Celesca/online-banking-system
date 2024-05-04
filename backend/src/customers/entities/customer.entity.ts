@@ -1,10 +1,16 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Person } from 'src/persons/entities/person.entity';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Customer {
   @PrimaryGeneratedColumn()
   customer_id: number;
 
-  @Column()
+  @Column({ type: 'int', nullable: false })
   customer_salary: number;
+
+  @OneToOne(() => Person)
+  @JoinColumn({ name: 'person_id' })
+  person: Person;
+  
 }
