@@ -33,6 +33,3 @@ jobs:
 
       - name: Lint backend code
         run: npm run lint
-
-      - name: Format backend code
-        run: npm run format
