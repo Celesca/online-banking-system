@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class PersonsService {
   constructor(
     @InjectRepository(Person)
-    private personRepository: Repository<Person>,
+    private readonly personRepository: Repository<Person>,
   ) {}
 
   findAll(): Promise<Person[]> {
