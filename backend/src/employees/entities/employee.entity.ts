@@ -1,24 +1,34 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm';
 import { Person } from 'src/persons/entities/person.entity';
 
 @Entity()
 export class Employee {
-  @PrimaryGeneratedColumn()
-  employee_id: number;
+  @PrimaryColumn({ type: 'varchar', length: 20 })
+  username_employee: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 20 })
   position: string;
 
+  @Column({ type: 'varchar', length: 20 })
+  password: string;
+
   @Column({ type: 'numeric', precision: 10, scale: 2 })
-  salary: number;
+  employee_salary: number;
 
   @OneToOne(() => Person)
-  @JoinColumn({ name: 'person_id' })
-  person_id: Person;
+  @JoinColumn({ name: 'nation_card_id' })
+  nation_card_id: Person;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  created_at: Date;
 }
