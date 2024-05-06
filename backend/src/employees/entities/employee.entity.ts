@@ -13,7 +13,7 @@ import * as bcrypt from 'bcrypt';
 @Entity()
 export class Employee {
   @PrimaryColumn({ type: 'varchar', length: 20 })
-  username_employee: string;
+  employee_username: string;
 
   @Column({ type: 'varchar', length: 20 })
   position: string;

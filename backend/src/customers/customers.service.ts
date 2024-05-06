@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Customer } from './entities/customer.entity';
@@ -12,12 +12,18 @@ export class CustomersService {
   ) {}
 
   async create(body: CustomerRegisterDto) {
-    const newCustomer = {
+    const existedUser = await this.customerRepository.findOneBy({
+      customer_username: body.username,
+    });
+    if (existedUser) {
+      throw new HttpException('User already exists', 400);
+    }
+    const customer = this.customerRepository.create({
       customer_username: body.username,
       password: body.password,
       customer_salary: body.salary,
-    }
-    return this.customerRepository.save(newCustomer);
+    });
+    return this.customerRepository.save(customer);
   }
 
   findAll(): Promise<Customer[]> {
