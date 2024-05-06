@@ -12,6 +12,7 @@ import { EmployeesModule } from 'src/employees/employees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Employee } from 'src/employees/entities/employee.entity';
+import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [
@@ -33,7 +34,13 @@ import { Employee } from 'src/employees/entities/employee.entity';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, CustomersService, EmployeesService],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    LocalStrategy,
+    CustomersService,
+    EmployeesService,
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}

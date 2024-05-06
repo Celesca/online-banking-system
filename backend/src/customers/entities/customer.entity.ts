@@ -12,10 +12,10 @@ import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class Customer {
-  @PrimaryColumn({ type: 'varchar', length: 30 })
+  @PrimaryColumn({ type: 'varchar', length: 30, unique: true, nullable: false })
   customer_username: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 20, nullable: false })
   password: string;
 
   @Column({ type: 'int', nullable: false })
