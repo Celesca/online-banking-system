@@ -30,7 +30,7 @@ export class Account {
   @Column({ type: 'boolean', nullable: false, default: '1' })
   status: boolean;
 
-  @ManyToOne(() => Customer, (customer) => customer.customer_id)
-  @JoinColumn({ name: 'customer_id' })
+  @ManyToOne(() => Customer, (customer) => customer.customer_username)
+  @JoinColumn({ name: 'customer_username' })
   customer: Customer;
 }

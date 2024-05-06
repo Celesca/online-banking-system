@@ -10,7 +10,6 @@ import { AccountTypeModule } from './account-type/account-type.module';
 import { TransactionModule } from './transaction/transaction.module';
 import { TransactionTypeModule } from './transaction-type/transaction-type.module';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -34,7 +33,6 @@ import { UsersModule } from './users/users.module';
     TransactionModule,
     TransactionTypeModule,
     AuthModule,
-    UsersModule,
   ],
 })
 export class AppModule {}
