@@ -1,20 +1,16 @@
-import { Controller, Get, Post, Request, Res, UseGuards } from '@nestjs/common';
-import { LocalAuthGuard } from './local-auth.guard';
+import { Controller, Post, Request, Res, UseGuards } from '@nestjs/common';
+// import { LocalAuthGuard } from './local-auth.guard';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './jwt-auth.guard';
-import { UsersService } from 'src/users/users.service';
-
+import { LocalAuthGuard } from './local-auth.guard';
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private authService: AuthService,
-    private userService: UsersService,
-  ) {}
+  constructor(private authService: AuthService) {}
 
+  // Customer Login
   @UseGuards(LocalAuthGuard)
-  @Post('login')
+  @Post('user/login')
   async login(@Request() req, @Res({ passthrough: true }) res) {
-    const { accessToken } = await this.authService.login(req.user);
+    const { accessToken } = await this.authService.login(req.body);
     // save to cookie
     res.cookie('access_token', accessToken, {
       httpOnly: true,
@@ -22,10 +18,15 @@ export class AuthController {
     return accessToken;
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  async getProfile(@Request() req) {
-    const user = await this.userService.findOne(req.user.username);
-    return user;
+  // Employee Login
+  @UseGuards(LocalAuthGuard)
+  @Post('employee/login')
+  async loginEmployee(@Request() req, @Res({ passthrough: true }) res) {
+    const { accessToken } = await this.authService.login(req.user);
+    // save to cookie
+    res.cookie('access_token', accessToken, {
+      httpOnly: true,
+    });
+    return accessToken;
   }
 }

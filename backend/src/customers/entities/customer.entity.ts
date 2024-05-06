@@ -1,5 +1,6 @@
 import { Person } from 'src/persons/entities/person.entity';
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -7,14 +8,15 @@ import {
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class Customer {
-  @PrimaryColumn({ type: 'string', length: 30 })
+  @PrimaryColumn({ type: 'varchar', length: 30, unique: true, nullable: false })
   customer_username: string;
 
-  @Column({ type: 'string', length: 20 })
-  customer_password: string;
+  @Column({ type: 'varchar', length: 20, nullable: false })
+  password: string;
 
   @Column({ type: 'int', nullable: false })
   customer_salary: number;
@@ -31,4 +33,9 @@ export class Customer {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   created_at: Date;
+
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
 }

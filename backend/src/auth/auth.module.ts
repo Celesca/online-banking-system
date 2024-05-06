@@ -1,18 +1,26 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { UsersModule } from 'src/users/users.module';
 import { PassportModule } from '@nestjs/passport';
-import { LocalStrategy } from './strategies/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CustomersService } from 'src/customers/customers.service';
+import { EmployeesService } from 'src/employees/employees.service';
+import { CustomersModule } from 'src/customers/customers.module';
+import { EmployeesModule } from 'src/employees/employees.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Customer } from 'src/customers/entities/customer.entity';
+import { Employee } from 'src/employees/entities/employee.entity';
+import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [
-    UsersModule,
+    CustomersModule,
+    EmployeesModule,
     PassportModule,
     ConfigModule.forRoot(), // Ensure ConfigModule is imported here
+    TypeOrmModule.forFeature([Customer, Employee]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
@@ -26,7 +34,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [
+    AuthService,
+    JwtStrategy,
+    LocalStrategy,
+    CustomersService,
+    EmployeesService,
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}
