@@ -32,11 +32,11 @@ export class Loan {
   @Column({ type: 'boolean', nullable: false, default: '1' })
   status: boolean;
 
-  @ManyToOne(() => Customer, (customer) => customer.customer_id, {
+  @ManyToOne(() => Customer, (customer) => customer.customer_username, {
     nullable: false,
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  @JoinColumn({ name: 'customer_id' })
+  @JoinColumn({ name: 'customer_username' })
   customer: Customer;
 }
