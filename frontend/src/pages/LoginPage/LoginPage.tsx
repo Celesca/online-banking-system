@@ -1,7 +1,15 @@
+import { useEffect, useState } from "react"
 import React from "react"
 import axios from "axios"
+import Swal from "sweetalert2"
 
 const LoginPage = () => {
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      window.location.href = "/home"
+    }
+  }, [])
 
   const [data, setData] = useState({
     username: "",
@@ -24,8 +32,21 @@ const LoginPage = () => {
     };
 
     axios.post("http://localhost:3000/auth/user/login", userData).then((response) => {
-      console.log(response.status, response.data.token);
+      if (response.status === 201) {
+        localStorage.setItem("token", response.data)
+        Swal.fire({
+          title: "Login Success",
+          text: "We are redirecting you to the homepage",
+          icon: "success",
+          timer: 2000,
+          
+        }).then(() => {
+          window.location.href = "/home"
+        })
+      }
     })
+
+
 
   }
   return (

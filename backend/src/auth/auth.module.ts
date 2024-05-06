@@ -13,6 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Customer } from 'src/customers/entities/customer.entity';
 import { Employee } from 'src/employees/entities/employee.entity';
 import { LocalStrategy } from './strategies/local.strategy';
+import { Person } from 'src/persons/entities/person.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { LocalStrategy } from './strategies/local.strategy';
     EmployeesModule,
     PassportModule,
     ConfigModule.forRoot(), // Ensure ConfigModule is imported here
-    TypeOrmModule.forFeature([Customer, Employee]),
+    TypeOrmModule.forFeature([Customer, Employee, Person]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
