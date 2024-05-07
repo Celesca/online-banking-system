@@ -1,6 +1,8 @@
 # Online Banking System
 
-Online banking system is the project in class CPE241 Database systems CPE KMUTT.
+Online banking system is the project in class CPE241 Database systems CPE KMUTT.'
+
+# ❌ Closed Project. Moving to Online Banking System Express.js
 
 ## ER Diagram (Database Design)
 
